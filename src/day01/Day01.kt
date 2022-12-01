@@ -46,7 +46,6 @@ import readInput
  *
  * Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
  */
-
 fun main() {
     fun part1(input: List<String>): Int {
         val result = mutableListOf(0)
