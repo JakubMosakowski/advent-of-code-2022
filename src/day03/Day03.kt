@@ -48,7 +48,47 @@ import readInput
  *
  * Find the item type that appears in both compartments of each rucksack.
  * What is the sum of the priorities of those item types?
+ *
+ * PART 2:
+ * As you finish identifying the misplaced items, the Elves come to you with another issue.
+ *
+ * For safety, the Elves are divided into groups of three.
+ * Every Elf carries a badge that identifies their group.
+ * For efficiency, within each group of three Elves, the badge is the only item type carried by all three Elves.
+ * That is, if a group's badge is item type B, then all three Elves will have item type B somewhere in their rucksack, and at most two of the Elves will be carrying any other item type.
+ *
+ * The problem is that someone forgot to put this year's updated authenticity sticker on the badges.
+ * All of the badges need to be pulled out of the rucksacks so the new authenticity stickers can be attached.
+ *
+ * Additionally, nobody wrote down which item type corresponds to each group's badges.
+ * The only way to tell which item type is the right one is by finding the one item type that is common between all three Elves in each group.
+ *
+ * Every set of three lines in your list corresponds to a single group, but each group can have a different badge item type. So, in the above example, the first group's rucksacks are the first three lines:
+ *
+ * vJrwpWtwJgWrhcsFMMfFFhFp
+ * jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+ * PmmdzqPrVvPwwTWBwg
+ * And the second group's rucksacks are the next three lines:
+ *
+ * wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ * ttgJtRGJQctTZtZT
+ * CrZsJsPPZsGzwwsLwLmpwMDw
+ * In the first group, the only item type that appears in all three rucksacks is lowercase r;
+ * this must be their badges. In the second group, their badge item type must be Z.
+ *
+ * Priorities for these items must still be found to organize the sticker attachment efforts:
+ * here, they are 18 (r) for the first group and 52 (Z) for the second group. The sum of these is 70.
+ *
+ * Find the item type that corresponds to the badges of each three-Elf group.
+ * What is the sum of the priorities of those item types?
  */
+
+fun Char.getSubtrahend() = if (isLowerCase()) {
+    LOWERCASE_ASCII_SUBTRAHEND
+} else {
+    UPPERCASE_ASCII_SUBTRAHEND
+}
+
 fun main() {
     fun part1(input: List<String>): Int = input.sumOf { line ->
         val firstBackpack = line.substring(0, line.length / 2)
@@ -56,21 +96,31 @@ fun main() {
         val duplicatedChar = line.filter { char -> firstBackpack.contains(char) && secondBackpack.contains(char) }
             .toCharArray().first()
 
-        val subtrahend = if (duplicatedChar.isLowerCase()) {
-            LOWERCASE_ASCII_SUBTRAHEND
-        } else {
-            UPPERCASE_ASCII_SUBTRAHEND
-        }
-
-        duplicatedChar.code - subtrahend
+        duplicatedChar.code - duplicatedChar.getSubtrahend()
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        var result = 0
+        input.indices.forEach { index ->
+            if (index % 3 == 2) {
+                val firstLine = input[index - 2]
+                val secondLine = input[index - 1]
+                val thirdLine = input[index]
+
+                val duplicatedChar = (firstLine + secondLine + thirdLine).filter { char ->
+                    firstLine.contains(char) && secondLine.contains(char) && thirdLine.contains(char)
+                }.toCharArray().first()
+
+                result += duplicatedChar.code - duplicatedChar.getSubtrahend()
+            }
+        }
+
+        return result
     }
 
     val testInput = readInput("Day03_test")
     check(part1(testInput) == 157)
+    check(part2(testInput) == 70)
 
     val input = readInput("Day03")
     println(part1(input))
