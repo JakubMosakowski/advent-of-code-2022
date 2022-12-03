@@ -34,12 +34,27 @@ import readInput
  * In this example, if you were to follow the strategy guide, you would get a total score of 15 (8 + 1 + 6).
  *
  * What would your total score be if everything goes exactly according to your strategy guide?
+ *
+ * PART 2:
+ * The Elf finishes helping with the tent and sneaks back over to you. "Anyway, the second column says how the round needs to end: X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win. Good luck!"
+ *
+ * The total score is still calculated in the same way, but now you need to figure out what shape to choose so the round ends as indicated. The example above now goes like this:
+ *
+ * In the first round, your opponent will choose Rock (A), and you need the round to end in a draw (Y), so you also choose Rock. This gives you a score of 1 + 3 = 4.
+ * In the second round, your opponent will choose Paper (B), and you choose Rock so you lose (X) with a score of 1 + 0 = 1.
+ * In the third round, you will defeat your opponent's Scissors with Rock for a score of 1 + 6 = 7.
+ * Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total score of 12.
+ *
+ * Following the Elf's instructions for the second column, what would your total score be if everything goes exactly according to your strategy guide?
  */
 fun main() {
-    fun part1(input: List<String>): Int = input.sumOf { line ->
-        val (opponent, response) = line.split(" ").let {
+    fun getPair(line: String): Pair<String, String> =
+        line.split(" ").let {
             it[0] to it[1]
         }
+
+    fun part1(input: List<String>): Int = input.sumOf { line ->
+        val (opponent, response) = getPair(line)
 
         when {
             opponent == ROCK && response == ROCK_RESPONSE -> DRAW + ROCK_SCORE
@@ -54,12 +69,25 @@ fun main() {
         }
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun part2(input: List<String>): Int = input.sumOf { line ->
+        val (opponent, response) = getPair(line)
+
+        when {
+            opponent == ROCK && response == SHOULD_LOOSE -> LOOSE + SCISSORS_SCORE
+            opponent == ROCK && response == SHOULD_DRAW -> DRAW + ROCK_SCORE
+            opponent == ROCK && response == SHOULD_WIN -> WON + PAPER_SCORE
+            opponent == PAPER && response == SHOULD_LOOSE -> LOOSE + ROCK_SCORE
+            opponent == PAPER && response == SHOULD_DRAW -> DRAW + PAPER_SCORE
+            opponent == PAPER && response == SHOULD_WIN -> WON + SCISSORS_SCORE
+            opponent == SCISSORS && response == SHOULD_LOOSE -> LOOSE + PAPER_SCORE
+            opponent == SCISSORS && response == SHOULD_DRAW -> DRAW + SCISSORS_SCORE
+            else -> WON + ROCK_SCORE
+        }
     }
 
     val testInput = readInput("Day02_test")
     check(part1(testInput) == 15)
+    check(part2(testInput) == 12)
 
     val input = readInput("Day02")
     println(part1(input))
@@ -77,6 +105,10 @@ const val SCISSORS = "C"
 const val ROCK_RESPONSE = "X"
 const val PAPER_RESPONSE = "Y"
 const val SCISSORS_RESPONSE = "Z"
+
+const val SHOULD_LOOSE = "X"
+const val SHOULD_DRAW = "Y"
+const val SHOULD_WIN = "Z"
 
 const val ROCK_SCORE = 1
 const val PAPER_SCORE = 2
