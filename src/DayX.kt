@@ -1,7 +1,9 @@
 /**
- * Instruction
+ *
+ *
+ * PART 2:
+ *
  */
-
 fun main() {
     fun part1(input: List<String>): Int {
         return input.size
