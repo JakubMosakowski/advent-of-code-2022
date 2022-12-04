@@ -53,10 +53,28 @@ import readInput
  * In how many assignment pairs does one range fully contain the other?
  *
  * PART 2:
+ * It seems like there is still quite a bit of duplicate work planned.
+ * Instead, the Elves would like to know the number of pairs that overlap at all.
  *
+ * In the above example, the first two pairs (2-4,6-8 and 2-3,4-5) don't overlap,
+ * while the remaining four pairs (5-7,7-9, 2-8,3-7, 6-6,4-6, and 2-6,4-8) do overlap:
+ *
+ * 5-7,7-9 overlaps in a single section, 7.
+ * 2-8,3-7 overlaps all of the sections 3 through 7.
+ * 6-6,4-6 overlaps in a single section, 6.
+ * 2-6,4-8 overlaps in sections 4, 5, and 6.
+ * So, in this example, the number of overlapping assignment pairs is 4.
+ *
+ * In how many assignment pairs do the ranges overlap?
  */
+fun IntRange.containsStart(range: IntRange): Boolean =
+    first in range
+
+fun IntRange.containsEnd(range: IntRange): Boolean =
+    last in range
+
 fun IntRange.contains(range: IntRange): Boolean =
-    first in range && last in range
+    containsStart(range) && containsEnd(range)
 
 fun String.toRange(): IntRange =
     split("-").map { it.toInt() }.let {
@@ -75,12 +93,20 @@ fun main() {
         if (firstContain || secondContain) 1L else 0L
     }.toInt()
 
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
+    fun part2(input: List<String>): Int = input.sumOf { line ->
+        val (firstElf, secondElf) = line.split(",")
+        val firstElfRange = firstElf.toRange()
+        val secondElfRange = secondElf.toRange()
+
+        val firstContain = firstElfRange.containsStart(secondElfRange) || firstElfRange.containsEnd(secondElfRange)
+        val secondContain = secondElfRange.containsStart(firstElfRange) || secondElfRange.containsEnd(firstElfRange)
+
+        if (firstContain || secondContain) 1L else 0L
+    }.toInt()
 
     val testInput = readInput("Day04_test")
     check(part1(testInput) == 2)
+    check(part2(testInput) == 4)
 
     val input = readInput("Day04")
     println(part1(input))
