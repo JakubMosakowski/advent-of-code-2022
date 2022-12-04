@@ -55,10 +55,25 @@ import readInput
  * PART 2:
  *
  */
-fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+fun IntRange.contains(range: IntRange): Boolean =
+    first in range && last in range
+
+fun String.toRange(): IntRange =
+    split("-").map { it.toInt() }.let {
+        it[0]..it[1]
     }
+
+fun main() {
+    fun part1(input: List<String>): Int = input.sumOf { line ->
+        val (firstElf, secondElf) = line.split(",")
+        val firstElfRange = firstElf.toRange()
+        val secondElfRange = secondElf.toRange()
+
+        val firstContain = firstElfRange.contains(secondElfRange)
+        val secondContain = secondElfRange.contains(firstElfRange)
+
+        if (firstContain || secondContain) 1L else 0L
+    }.toInt()
 
     fun part2(input: List<String>): Int {
         return input.size
