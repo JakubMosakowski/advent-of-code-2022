@@ -1,12 +1,12 @@
 package day05
 
-class MatrixManipulator(drawing: List<String>, numberOfStacks: Int, private val mover: CrateMover) {
+class MatrixManipulator(
+    drawing: List<String>,
+    private val numberOfStacks: Int,
+    private val mover: CrateMover
+) {
 
-    private var columns: List<List<Char>>
-
-    init {
-        columns = drawing.toMatrix(numberOfStacks).sanitizeToColumns()
-    }
+    private var columns: List<List<Char>> = drawing.toColumns()
 
     fun move(moves: List<Move>): List<List<Char>> =
         moves.fold(columns) { acc, currentMove ->
@@ -27,13 +27,17 @@ class MatrixManipulator(drawing: List<String>, numberOfStacks: Int, private val 
         }
     }
 
-    private fun List<String>.toMatrix(numberOfStacks: Int): List<List<Char>> =
-        map { row ->
-            (0 until numberOfStacks).map { i -> row.padEnd(numberOfStacks.getDrawingIndex())[i.getDrawingIndex()] }
+    private fun List<String>.toColumns(): List<List<Char>> =
+        (0 until numberOfStacks).map { columnIndex ->
+            map { row -> row.padToMax()[columnIndex.getDrawingIndex()] }.filterNotBlank()
         }
 
-    private fun List<List<Char>>.sanitizeToColumns(): List<List<Char>> =
-        (0 until first().size).map { i ->
-            (indices).map { j -> get(j)[i] }.filter { it != ' ' }
-        }
+    private fun String.padToMax(): String =
+        padEnd(numberOfStacks.getDrawingIndex())
+
+    private fun List<Char>.filterNotBlank(): List<Char> =
+        filterNot { it == ' ' }
+
+    private fun Int.getDrawingIndex() =
+        this + 1 + 3 * this
 }

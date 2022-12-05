@@ -8,8 +8,5 @@ fun List<String>.getNumberOfStacks(separatorIndex: Int): Int =
 fun List<String>.getDrawing(separatorIndex: Int): List<String> =
     subList(fromIndex = 0, toIndex = separatorIndex - 1)
 
-fun Int.getDrawingIndex() =
-    this + 1 + 3 * this
-
 fun List<String>.getMoves(separatorIndex: Int): List<String> =
     subList(fromIndex = separatorIndex + 1, toIndex = size)
