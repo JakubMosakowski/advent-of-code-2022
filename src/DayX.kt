@@ -13,10 +13,10 @@ fun main() {
         return input.size
     }
 
-    val testInput = readInput("Day0X_test")
+    val testInput = readInput("test_input")
     check(part1(testInput) == 24000)
 
-    val input = readInput("Day0X")
+    val input = readInput("input")
     println(part1(input))
     println(part2(input))
 }
