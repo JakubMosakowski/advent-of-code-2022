@@ -67,21 +67,7 @@ import readInput
  *
  * In how many assignment pairs do the ranges overlap?
  */
-fun IntRange.containsStart(range: IntRange): Boolean =
-    first in range
-
-fun IntRange.containsEnd(range: IntRange): Boolean =
-    last in range
-
-fun IntRange.contains(range: IntRange): Boolean =
-    containsStart(range) && containsEnd(range)
-
-fun String.toRange(): IntRange =
-    split("-").map { it.toInt() }.let {
-        it[0]..it[1]
-    }
-
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int = input.sumOf { line ->
         val (firstElf, secondElf) = line.split(",")
         val firstElfRange = firstElf.toRange()
@@ -112,3 +98,17 @@ fun main() {
     println(part1(input))
     println(part2(input))
 }
+
+private fun IntRange.containsStart(range: IntRange): Boolean =
+    first in range
+
+private fun IntRange.containsEnd(range: IntRange): Boolean =
+    last in range
+
+private fun IntRange.contains(range: IntRange): Boolean =
+    containsStart(range) && containsEnd(range)
+
+private fun String.toRange(): IntRange =
+    split("-").map { it.toInt() }.let {
+        it[0]..it[1]
+    }

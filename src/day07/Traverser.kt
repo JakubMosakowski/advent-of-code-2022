@@ -2,7 +2,7 @@ package day07
 
 import day07.Command.Cd
 
-class Traverser(private val input: List<String>) {
+internal class Traverser(private val input: List<String>) {
 
     private val dirs = mutableSetOf<Dir>()
     private val absolutePath = mutableListOf<String>()

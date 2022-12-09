@@ -59,7 +59,7 @@ import readInput
  *
  * Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
  */
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int {
         val result = mutableListOf(0)
         var currentElfIndex = 0

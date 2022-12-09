@@ -1,6 +1,6 @@
 package day07
 
-data class Dir(
+internal data class Dir(
     val path: String,
     val childrenPaths: MutableSet<String>,
     var size: Long

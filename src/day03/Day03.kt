@@ -82,14 +82,7 @@ import readInput
  * Find the item type that corresponds to the badges of each three-Elf group.
  * What is the sum of the priorities of those item types?
  */
-
-fun Char.getSubtrahend() = if (isLowerCase()) {
-    LOWERCASE_ASCII_SUBTRAHEND
-} else {
-    UPPERCASE_ASCII_SUBTRAHEND
-}
-
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int = input.sumOf { line ->
         val firstBackpack = line.substring(0, line.length / 2)
         val secondBackpack = line.substring(line.length / 2, line.length)
@@ -127,5 +120,11 @@ fun main() {
     println(part2(input))
 }
 
-const val LOWERCASE_ASCII_SUBTRAHEND = 96
-const val UPPERCASE_ASCII_SUBTRAHEND = 38
+private fun Char.getSubtrahend() = if (isLowerCase()) {
+    LOWERCASE_ASCII_SUBTRAHEND
+} else {
+    UPPERCASE_ASCII_SUBTRAHEND
+}
+
+private const val LOWERCASE_ASCII_SUBTRAHEND = 96
+private const val UPPERCASE_ASCII_SUBTRAHEND = 38

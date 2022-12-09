@@ -1,6 +1,6 @@
 package day05
 
-class MatrixManipulator(
+internal class MatrixManipulator(
     drawing: List<String>,
     private val numberOfStacks: Int,
     private val mover: CrateMover

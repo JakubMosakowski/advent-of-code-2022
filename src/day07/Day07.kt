@@ -115,7 +115,7 @@ import readInput
  *
  * Find the smallest directory that, if deleted, would free up enough space on the filesystem to run the update. What is the total size of that directory?
  */
-fun main() {
+private fun main() {
 
     fun part1(input: List<String>): Long {
         val traverser = Traverser(input)
@@ -143,6 +143,6 @@ fun main() {
     println(part2(input))
 }
 
-const val MAX = 100000
-const val DISK_SIZE = 70000000
-const val REQUIRED_SPACE = 30000000
+private const val MAX = 100000
+private const val DISK_SIZE = 70000000
+private const val REQUIRED_SPACE = 30000000

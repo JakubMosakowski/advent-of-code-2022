@@ -59,7 +59,7 @@ import readInput
  * zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw: first marker after character 26
  * How many characters need to be processed before the first start-of-message marker is detected?
  */
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int =
         input.first().findIndex(FIRST_REQUESTED_MARKER_SIZE)
 
@@ -75,7 +75,7 @@ fun main() {
     println(part2(input))
 }
 
-fun String.findIndex(requestedMarkerSize: Int): Int {
+private fun String.findIndex(requestedMarkerSize: Int): Int {
     val currentMarker = mutableListOf<Char>()
 
     forEachIndexed { index, char ->
@@ -90,6 +90,6 @@ fun String.findIndex(requestedMarkerSize: Int): Int {
     return NOT_FOUND
 }
 
-const val FIRST_REQUESTED_MARKER_SIZE = 4
-const val SECOND_REQUESTED_MARKER_SIZE = 14
-const val NOT_FOUND = -1
+private const val FIRST_REQUESTED_MARKER_SIZE = 4
+private const val SECOND_REQUESTED_MARKER_SIZE = 14
+private const val NOT_FOUND = -1

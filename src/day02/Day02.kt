@@ -47,7 +47,7 @@ import readInput
  *
  * Following the Elf's instructions for the second column, what would your total score be if everything goes exactly according to your strategy guide?
  */
-fun main() {
+private fun main() {
     fun getPair(line: String): Pair<String, String> =
         line.split(" ").let {
             it[0] to it[1]
@@ -94,22 +94,22 @@ fun main() {
     println(part2(input))
 }
 
-const val LOOSE = 0
-const val DRAW = 3
-const val WON = 6
+private const val LOOSE = 0
+private const val DRAW = 3
+private const val WON = 6
 
-const val ROCK = "A"
-const val PAPER = "B"
-const val SCISSORS = "C"
+private const val ROCK = "A"
+private const val PAPER = "B"
+private const val SCISSORS = "C"
 
-const val ROCK_RESPONSE = "X"
-const val PAPER_RESPONSE = "Y"
-const val SCISSORS_RESPONSE = "Z"
+private const val ROCK_RESPONSE = "X"
+private const val PAPER_RESPONSE = "Y"
+private const val SCISSORS_RESPONSE = "Z"
 
-const val SHOULD_LOOSE = "X"
-const val SHOULD_DRAW = "Y"
-const val SHOULD_WIN = "Z"
+private const val SHOULD_LOOSE = "X"
+private const val SHOULD_DRAW = "Y"
+private const val SHOULD_WIN = "Z"
 
-const val ROCK_SCORE = 1
-const val PAPER_SCORE = 2
-const val SCISSORS_SCORE = 3
+private const val ROCK_SCORE = 1
+private const val PAPER_SCORE = 2
+private const val SCISSORS_SCORE = 3

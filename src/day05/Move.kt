@@ -1,6 +1,6 @@
 package day05
 
-data class Move(
+internal data class Move(
     val quantity: Int,
     val fromIndex: Int,
     val toIndex: Int

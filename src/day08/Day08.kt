@@ -88,7 +88,7 @@ import readInput
  *
  * Consider each tree on your map. What is the highest scenic score possible for any tree?
  */
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int {
         val grid = getGrid(input)
         var counter = 0
@@ -136,7 +136,7 @@ fun main() {
     println(part2(input))
 }
 
-fun getGrid(input: List<String>): List<List<Int>> {
+private fun getGrid(input: List<String>): List<List<Int>> {
     val grid = mutableListOf<List<Int>>()
 
     input.forEach { line ->
@@ -146,31 +146,31 @@ fun getGrid(input: List<String>): List<List<Int>> {
     return grid
 }
 
-fun isLeftEdge(rowIndex: Int) =
+private fun isLeftEdge(rowIndex: Int) =
     rowIndex == 0
 
-fun isTopEdge(columnIndex: Int) =
+private fun isTopEdge(columnIndex: Int) =
     columnIndex == 0
 
-fun isRightEdge(rowIndex: Int, gridSize: Int) =
+private fun isRightEdge(rowIndex: Int, gridSize: Int) =
     rowIndex == gridSize - 1
 
-fun isBottomEdge(columnIndex: Int, gridSize: Int) =
+private fun isBottomEdge(columnIndex: Int, gridSize: Int) =
     columnIndex == gridSize - 1
 
-fun isVisibleFromLeft(row: List<Int>, columnIndex: Int, treeSize: Int) =
+private fun isVisibleFromLeft(row: List<Int>, columnIndex: Int, treeSize: Int) =
     row.subList(0, columnIndex).all { it < treeSize }
 
-fun isVisibleFromTop(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int, treeSize: Int) =
+private fun isVisibleFromTop(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int, treeSize: Int) =
     grid.subList(0, rowIndex).map { it[columnIndex] }.all { it < treeSize }
 
-fun isVisibleFromRight(row: List<Int>, columnIndex: Int, treeSize: Int) =
+private fun isVisibleFromRight(row: List<Int>, columnIndex: Int, treeSize: Int) =
     row.subList(columnIndex + 1, row.size).all { it < treeSize }
 
-fun isVisibleFromBottom(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int, treeSize: Int) =
+private fun isVisibleFromBottom(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int, treeSize: Int) =
     grid.subList(rowIndex + 1, grid.size).map { it[columnIndex] }.all { it < treeSize }
 
-fun getLeftScore(row: List<Int>, columnIndex: Int): Int {
+private fun getLeftScore(row: List<Int>, columnIndex: Int): Int {
     if (columnIndex == 0) {
         return 0
     }
@@ -185,7 +185,7 @@ fun getLeftScore(row: List<Int>, columnIndex: Int): Int {
     return columnIndex - lastVisibleIndex
 }
 
-fun getTopScore(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int): Int {
+private fun getTopScore(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int): Int {
     if (rowIndex == 0) {
         return 0
     }
@@ -201,7 +201,7 @@ fun getTopScore(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int): Int {
     return rowIndex - lastVisibleIndex
 }
 
-fun getRightScore(row: List<Int>, columnIndex: Int): Int {
+private fun getRightScore(row: List<Int>, columnIndex: Int): Int {
     if (columnIndex == row.size - 1) {
         return 0
     }
@@ -218,7 +218,7 @@ fun getRightScore(row: List<Int>, columnIndex: Int): Int {
     return lastVisibleIndex
 }
 
-fun getBottomScore(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int): Int {
+private fun getBottomScore(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int): Int {
     if (rowIndex == grid.size - 1) {
         return 0
     }
@@ -238,7 +238,7 @@ fun getBottomScore(grid: List<List<Int>>, rowIndex: Int, columnIndex: Int): Int 
 }
 
 
-fun getTreeScore(grid: List<List<Int>>, row: List<Int>, rowIndex: Int, columnIndex: Int): Int =
+private fun getTreeScore(grid: List<List<Int>>, row: List<Int>, rowIndex: Int, columnIndex: Int): Int =
     getLeftScore(row, columnIndex) *
             getTopScore(grid, rowIndex, columnIndex) *
             getRightScore(row, columnIndex) *

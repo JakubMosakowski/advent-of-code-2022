@@ -1,6 +1,6 @@
 package day07
 
-sealed class Command {
+internal sealed class Command {
     class Cd(val dir: String) : Command()
     object Ls : Command()
 
