@@ -2,13 +2,7 @@ package day12
 
 import readInput
 
-/**
- *
- *
- * PART 2:
- *
- */
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int {
         return input.size
     }

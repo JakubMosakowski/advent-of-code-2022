@@ -1,7 +1,7 @@
 package day09
 
 
-enum class Move {
+internal enum class Move {
     LEFT,
     UP,
     RIGHT,

@@ -268,7 +268,7 @@ import readInput
  * PART 2:
  * Too long
  */
-fun main() {
+private fun main() {
     fun part1(input: List<String>): Int =
         countVisited(input, 2)
 
@@ -286,7 +286,7 @@ fun main() {
     println(part2(input))
 }
 
-fun countVisited(input: List<String>, knots: Int): Int {
+private fun countVisited(input: List<String>, knots: Int): Int {
     val moves = Move.fromList(input)
     val rope = MutableList(knots) { Point(0, 0) }
     val coveredPoints = mutableSetOf(rope.first())
